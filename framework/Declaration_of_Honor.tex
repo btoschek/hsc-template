@@ -1,0 +1,47 @@
+\pagestyle{plain}
+\pagenumbering{gobble}
+
+
+\textbf{{\Large Ehrenwörtliche Erklärung}}
+\vspace{2cm}
+
+% Determine article for document type
+\ifthenelse{\equal{\DocumentType}{Praxisbericht}}
+  {\newcommand{\DocumentArticle}{meinen}}
+  {
+    \ifthenelse{\equal{\DocumentType}{Bachelorarbeit}}
+      {\newcommand{\DocumentWord}{meine}}
+      {
+        \ifthenelse{\equal{\DocumentType}{Masterarbeit}}
+          {\newcommand{\DocumentArticle}{meine}}
+          {\newcommand{\DocumentArticle}{meine/n}}
+      }
+  }
+
+Ich versichere hiermit, dass ich \DocumentArticle\ \DocumentType \ mit dem Titel
+\vspace{1cm}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ccc}
+ \\ \hline
+ \vspace{2cm}
+ \\ \hline
+\end{tabular*}
+\vspace{2cm}
+
+selbständig verfasst, keine anderen als die angegebenen Quellen und Hilfsmittel benutzt
+sowie nicht an anderer Stelle als Prüfungsarbeit vorgelegt habe.
+\vfill
+
+\begin{table*}[hp]
+  \centering
+  \begin{tabular}{L{6cm}L{2cm}L{6cm}}
+    & & \\
+    & & \\ \cline{1-1}
+    Ort &  \\
+    & & \\
+    & & \\
+    & & \\
+    & &  \\ \cline{1-1} \cline{3-3}
+    Datum & & Unterschrift \\
+  \end{tabular}
+\end{table*}

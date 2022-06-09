@@ -1,0 +1,161 @@
+% Disable single lines at the start of a paragraph (Schusterjungen)
+\clubpenalty=10000
+
+% Disable single lines at the end of a paragraph (Hurenkinder)
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% Fixed size table columns
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\renewcommand{\arraystretch}{1.2}                       % Distance between lines in tables
+
+\captionsetup{justification=raggedright}                % Align captions to the left
+
+\setcounter{secnumdepth}{3}                             % Only allow nesting 3 layers (down to subsubsections)
+
+% Set convention to german (comma instead of point delimiter for floats)
+\sisetup{locale = DE}
+
+% -------------------------------------------------------------------
+%                     Usability & visual changes
+% -------------------------------------------------------------------
+
+% Create a better looking header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\nouppercase{\leftmark}}
+\rfoot{\thepage}
+
+% Automatically generate a box around figure environments
+\floatstyle{boxed}
+\restylefloat{figure}
+
+% Set toc sections to be clickable
+\hypersetup{
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black
+}
+
+\frenchspacing                                          % Insert one space after a sentence, not 2
+
+\renewcommand{\UrlFont}{\color{blue}\rmfamily\itshape}  % URLs should be displayed in blue
+\renewcommand{\dateseparator}{.}                        % Dates are written like 01.01.1970, not 01-01-1970
+\renewcommand{\nomname}{Symbolverzeichnis}              % Nomenclature in german is "Symbolverzeichnis"
+
+\addto{\captionsngerman}{
+  \renewcommand*{\figurename}{Abb.}                     % Figures should be displayed as "Abb. x"
+  \renewcommand*{\tablename}{Tab.}                      % Tables should be displayed as "Tab. x"
+  \renewcommand*{\lstlistingname}{Code}                 % Code should be displayed as "Code x"
+}
+
+% -------------------------------------------------------------------
+%                        Code listing setup
+% -------------------------------------------------------------------
+
+\lstset{
+  basicstyle=\small\ttfamily\color{black},  % Font size used for the code
+  commentstyle=\ttfamily\color{gray},       % Comment style
+  keywordstyle=\ttfamily\color{blue},       % Keyword style
+  stringstyle=\color{orange},               % String literal style
+  frame=single,                             % Add a frame around the code
+  showstringspaces=false,                   % Don't underline spaces within strings only
+  captionpos=b,                             % Set caption-position to bottom
+  backgroundcolor=\color{white},            % Background color
+}
+
+% To style lstlistlisting like the lof, you first have to register it
+% to tocloft, as mentioned in https://tex.stackexchange.com/a/27648/27635
+\makeatletter
+\begingroup\let\newcounter\@gobble\let\setcounter\@gobbletwo
+  \globaldefs\@ne \let\c@loldepth\@ne
+  \newlistof{listings}{lol}{\lstlistlistingname}
+\endgroup
+\let\l@lstlisting\l@listings
+\makeatother
+
+% -------------------------------------------------------------------
+%                         Redefining geometry
+% -------------------------------------------------------------------
+
+% Figures
+\renewcommand{\cftfigpresnum}{Abb.~}
+\renewcommand{\cftfigaftersnum}{:}
+\setlength{\cftfignumwidth}{2cm}
+\setlength{\cftfigindent}{0cm}
+
+% Tables
+\renewcommand{\cfttabpresnum}{Tab.~}
+\renewcommand{\cfttabaftersnum}{:}
+\setlength{\cfttabnumwidth}{2cm}
+\setlength{\cfttabindent}{0cm}
+
+% Listings
+\renewcommand*{\cftlistingspresnum}{\lstlistingname~}
+\renewcommand*{\cftlistingsaftersnum}{:}
+\settowidth{\cftlistingsnumwidth}{\cftlistingspresnum}
+\addtolength{\cftlistingsnumwidth}{1cm}
+\setlength{\cftlistingsindent}{0cm}
+
+% page margins
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=2.5cm,
+  bottom=3cm
+}
+
+\setlength{\parindent}{0cm}                             % Don't indent start of paragraph
+\setlength{\parskip}{6pt}                               % Lines are seperated by 6pt
+
+\setlength{\headheight}{1.25cm}
+\setlength{\footskip}{1cm}
+\setlength{\headsep}{1cm}
+
+% -------------------------------------------------------------------
+%                    Custom counters & commands
+% -------------------------------------------------------------------
+
+\newcounter{countacronym}
+\DeclareTotalCounter{countacronym}
+\newcommand*{\acr}[1]{\acrshort{#1}\addtocounter{countacronym}{1}}
+\newcommand*{\Acr}[1]{\acrlong{#1}\addtocounter{countacronym}{1}}
+
+\newcounter{countnomen}
+\DeclareTotalCounter{countnomen}
+\newcommand*{\nomen}[2]{\nomenclature{#1}{#2}\addtocounter{countnomen}{1}}
+\newcommand{\nomunit}[1]{\renewcommand{\nomentryend}{\hspace*{\fill}#1}}
+\newcommand{\nomsi}[1]{\nomunit{[\si{#1}]}}
+
+\newcounter{countglossary}
+\DeclareTotalCounter{countglossary}
+\let\oldGls\Gls
+\let\oldgls\gls
+\let\oldGlspl\Glspl
+\let\oldglspl\glspl
+\renewcommand*{\Gls}[1]{\oldGls{#1}\addtocounter{countglossary}{1}}
+\renewcommand*{\Glspl}[1]{\oldGlspl{#1}\addtocounter{countglossary}{1}}
+\renewcommand*{\gls}[1]{\oldgls{#1}\addtocounter{countglossary}{1}}
+\renewcommand*{\glspl}[1]{\oldglspl{#1}\addtocounter{countglossary}{1}}
+
+% TODO annotations
+\newcounter{counttodo}
+\DeclareTotalCounter{counttodo}
+\newcommand{\note}[2][]{
+  \todo[color=green!25,bordercolor=green,tickmarkheight=3pt,#1]{#2}
+  \addtocounter{counttodo}{1}
+}
+\newcommand{\unsure}[2][]{
+  \todo[color=Plum!25,bordercolor=Plum,tickmarkheight=3pt,#1]{#2}
+  \addtocounter{counttodo}{1}
+}
+\newcommand{\change}[2][]{
+  \todo[color=blue!25,bordercolor=blue,tickmarkheight=3pt,#1]{#2}
+  \addtocounter{counttodo}{1}
+}
+
+\newcommand{\imgref}[1]{Abbildung \ref{#1}}
