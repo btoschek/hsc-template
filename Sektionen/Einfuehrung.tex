@@ -1,0 +1,186 @@
+\section{Einführung}
+\label{sec:einfuehrung}
+
+Bei diesem Dokument handelt es sich um eine \LaTeX{} Vorlage für wissenschaftliche Arbeiten in der \Acr{FEIF}. Es handelt sich hierbei nicht um eine Anleitung wie \LaTeX{} funktioniert, sondern rein um eine Vorlage die den formalen Richtlinien der \acr{FEIF} entspricht.
+
+\newpage
+\section{\LaTeX}
+
+\LaTeX{} gehört zu den Typesetting-Sprachen und kann auf den ersten Blick ziemlich abschreckend wirken.
+Einmal erlernt erlaubt es \LaTeX{} jedoch, Text schnell "auf Papier zu bringen". Dies liegt vor allem daran,
+dass sich der Autor lediglich Gedanken um den Inhalt eines Dokuments machen muss, und das Layout sowie
+bestimmte Verzeichnisse automatisch generiert werden. Nachfolgend wird ein kurzer Einblick in die Grundlagen
+von \LaTeX{} gegeben.
+
+\subsection{Inhalt}
+
+Das Inhaltsverzeichnis wird durch die Verwendung von Überschriften im Text automatisch erstellt.
+Wird eine neue Überschrift hinzugefügt, taucht diese an der entsprechenden Stelle im Inhaltsverzeichnis auf.
+Wird eine Überschrift gelöscht, so wird sie auch aus dem Inhaltsverzeichnis entfernt. \\
+
+Zudem gibt es noch weitere Verzeichnisse, die automatisch eingelayoutet werden.
+
+\subsubsection{Abbildungen / Bilder}
+
+Auch das Abbildungsverzeichnis wird automatisch erstellt, hierzu muss eine Abbildung mit
+entsprechender Syntax eingebunden werden. In diesem Beispiel haben wir in Abbildung
+\ref{fig: Logo der Hochschule Coburg} das Logo der Hochschule Coburg als Bild eingebunden.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{framework/Logo_HS_Coburg}
+  \caption{Logo der Hochschule Coburg}
+  \label{fig: Logo der Hochschule Coburg}
+\end{figure}
+
+Durch den "\textbackslash{}caption"-Befehl taucht die Grafik automatisch im Abbildungsverzeichnis auf.
+
+\subsubsection{Tabellen}
+
+Tabellen mit \LaTeX{} zu erstellen ist anfangs zugegebenermaßen etwas umständlich. Deswegen hier ein einfaches
+Beispiel für eine Tabelle:
+
+% Notiz: \hline erzeugt eine horizontale Linie
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Spalte 1 & Spalte 2 & Spalte 3 \\
+    \hline
+    1.1 & 1.2 & 1.3 \\
+    2.1 & 2.2 & 2.3 \\
+    \hline
+  \end{tabular}
+  \caption{Beispieltabelle}
+  \label{tab: Beispieltabelle}
+\end{table}
+
+Der "\textbackslash{}caption"-Befehl lässt die Tabelle wieder automatisch im Tabellenverzeichnis auftauchen.
+
+\subsubsection{Codesnippets}
+
+Codesnippets werden automatisch mit dem entsprechenden "Syntax Highlighting" angezeigt.
+Hierbei lässt sich die Sprache pro Snippet ändern.
+\vspace{.5cm}
+
+\begin{lstlisting}[language=Python,caption=MD5-Hash-Generierung in Python]
+import hashlib
+password = '<PASSWORD>'
+hashed = hashlib.md5((password + '5aM-2').encode()).hexdigest()
+print(hashed)
+\end{lstlisting}
+
+\begin{lstlisting}[language=HTML,caption=HTML-Beispiel]
+<body>
+  <div class="example" id="test">
+    <p>HTML Test</p>
+  </div>
+</body>
+\end{lstlisting}
+
+\subsection{Vorteile von \LaTeX}
+
+\LaTeX{} macht es dem Autor besonders einfach, komplexe mathematische Formeln zu beschreiben, hier einige
+Beispiele:
+
+\begin{equation}
+  \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i
+\end{equation}
+
+\begin{align*}
+  \int_0^2 x^2 &= 5 \\
+  \lim_{x\to\infty} f(x) &= \sqrt{\ldots}
+\end{align*}
+
+Das Zitieren von verschiedenen Dokumenten ist in \LaTeX{} ebenso relativ einfach:
+
+"Eine Faltung zweier Funktionen im Zeitbereich gestaltet sich als kompliziert, eine Vereinfachung
+bringt es, die Funktionen in den Laplace-Bildbereich zu überführen.
+Die Faltung im Zeitbereich entspricht einer Multiplikation im Bildbereich." \cite[S. 339f]{Papula2006}
+
+Hierzu bietet es sich an, in einer genaueren Dokumentation zum Thema nachzulesen (Achtung: Englisch):
+\url{https://www.overleaf.com/learn/latex/Bibliography_management_with_bibtex}
+
+\section{Funktionalität}
+
+Diese Vorlage wurde als Nachfolger der HS-internen Vorlage entworfen, welche nicht ohne Weiteres
+erweiterbar war. Im Zuge der Umgestaltung wurden zahlreiche nicht benötigte Zeilen
+gelöscht und eine für den Nutzer einfachere Umgebung geschaffen.
+
+Verzeichnisse werden nun nur eingefügt, wenn diese auch benötigt werden (siehe \Gls{Glossar}). Sollten Packages fehlen oder
+Einstellungen hinzugefügt werden wollen, so kann einfach eine Datei "Custom.tex" im gleichen Ordner wie
+"Arbeit.tex" erzeugt werden. Diese Datei wird automatisch nach dem Laden der Vorlage ausgeführt
+und besitzt somit die Möglichkeit, bereits gesetzte Werte und Variablen zu überschreiben.
+
+Der Code wurde ausführlich kommentiert und sollte für Jeden ohne viel Mehraufwand veränderlich sein.
+
+\subsection{Vorlagen-spezifische Funktionen}
+
+Diese Vorlage stellt einige Funktionen zur Verfügung, die spezifisch für den Anwendungsfall sind.
+
+\todo[inline,nolist,color=red!25,bordercolor=red]{!!! Die Definition des Templates liegt im Ordner "framework".
+In diesem Ordner sollten keine Dateien gelöscht oder verändert werden.}
+
+\subsubsection{Verwendung von Akronymen}
+
+Bitte für Akronyme ausschließlich die unteren Kommandos benutzen, da das Abkürzungsverzeichnis
+sonst nicht angezeigt wird.
+
+\begin{itemize}
+  \item \textbackslash{}acr\{xyz\} für Kurzform des Akronyms
+  \item \textbackslash{}Acr\{xyz\} für die lange Form des Akronyms
+\end{itemize}
+
+\subsubsection{Symbolverzeichnis}
+
+Über "\textbackslash{}nomen\{<ZEICHEN>\}\{<BESCHREIBUNG>\}" kann ein neuer Eintrag im
+Symbolverzeichnis erzeugt werden. Die nachfolgenden Kommandos erleichtern die Erstellung
+eines Eintrags, sind jedoch nicht zwangsläufig notwendig.
+
+\begin{itemize}
+  \item \textbackslash{}nomunit\{xyz\} für die rechte Spalte
+  \item \textbackslash{}nomsi\{\textbackslash{}metre\} für die formatierte Einheit (hier Meter)
+\end{itemize}
+
+\subsubsection{Fortschrittsmanagement}
+
+Wenn man an einem stetig wachsenden Dokument arbeitet, kann es sein,
+dass einem einfällt, etwas an anderer Stelle im Text zu ändern oder zu überarbeiten.
+Um nicht alles separat oder sogar mit Block und Stift aufzuschreiben (wofür benutzt man schließlich
+einen Computer), stellt die Vorlage einige Kommandos zur Verfügung, um Anmerkungen
+automatisch einzulayouten.
+
+\begin{itemize}
+  \item \note{Beispielnotiz}\textbackslash{}note\{Beispielnotiz\} für eine neue Notiz am Rand
+  \item \unsure{Überarbeitung anstehend}\textbackslash{}unsure\{Überarbeitung anstehend\}: eventuelle Überarbeitung später
+  \item \change{Änderung}\textbackslash{}change\{Änderung\}: Änderungsidee
+\end{itemize}
+
+Sobald TODOs im Dokument vorhanden sind, werden diese auf der letzten Seite aufgeführt.
+
+\subsubsection{Tabellen mit Kopfzeile}
+
+Um Tabellen mit Kopfzeile einzufügen, kann die "\textbackslash{}colortable"-Umgebung genutzt werden.
+
+\begin{table}[H]
+  \centering
+
+  % Custom tabular environment
+  \begin{colortable}{|c|c|c|}
+    Spalte 1 & Spalte 2 & Spalte 3 \\
+    \tablecontent
+    1.1 & 1.2 & 1.3 \\
+    2.1 & 2.2 & 2.3 \\
+  \end{colortable}
+
+  \caption{Custom Tabelle}
+  \label{tab: Tabelle 2}
+\end{table}
+
+\subsubsection{Referenzen}
+
+Um Referenzen auf Abbildungen syntaktisch zu verkürzen, stellt das Template
+ein eigenes Makro zur Verfügung: "\textbackslash{}imgref\{<LABEL>\}".
+
+Referenz auf Abbildung \ref{fig: Logo der Hochschule Coburg}: \imgref{fig: Logo der Hochschule Coburg}

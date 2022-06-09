@@ -1,0 +1,82 @@
+% -------------------------------------------------------------------
+%                  Essential packages (used in template)
+% -------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc}                   % Allow Umlauts (ä, ö, ü)
+\usepackage[ngerman]{babel, translator}       % German LaTeX-intern descriptors (Abbildungen, ...)
+\usepackage{mathptmx}                         % Font "Times New Roman" in mathematical Environments
+\usepackage{courier}                          % Support the use of font "Courier" (used in listings)
+\usepackage[T1]{fontenc}                      % Change LaTeX font encoding to support modern fonts
+\usepackage{fix-cm}                           % Fix sizes at which CM and EC fonts can be used
+
+\usepackage{geometry}                         % Change text bounds on a per-page basis
+\usepackage{fancyhdr}                         % Allow easy customization of headers and footers
+
+\usepackage[ddmmyyyy]{datetime}               % Reformat times from LaTeX commands like \today
+
+\usepackage[usenames,dvipsnames]{xcolor}      % Support text colorization
+
+\usepackage{colortbl}                         % Support applying colors to tables
+\usepackage{array}                            % Tables with fixed column size
+\usepackage{longtable}                        % Support multi-page tables
+\usepackage{multicol}                         % Additional settings for \multicolumn
+\usepackage{multirow}                         % Additional settings for \multirow
+
+\usepackage[hyphens,obeyspaces,spaces]{url}   % Allow urls to have line breaks at "-"
+\usepackage{hyperref}                         % Clickable hyperlinks in Table of Contents
+\usepackage{microtype}                        % Enable "Blocksatz"
+
+\usepackage{float}                            % Support for table H option
+\usepackage{floatflt}                         % Support text wrapping around floating environments
+\usepackage{wrapfig}                          % Support text wrapping around figures
+
+\usepackage{graphicx}                         % Support including graphics environments for images
+\usepackage{caption}                          % Provide greater customization around captions
+\usepackage{subcaption}                       % Caption support for subfigures
+
+\usepackage[onehalfspacing]{setspace}         % Set line spacing to be 1.5x the default
+\usepackage{listings}                         % Code block support for LaTeX
+
+\usepackage[titles]{tocloft}                  % More options to modify list of figures & tables
+\usepackage{nomencl}                          % Support for nomenclatures ("Symbolverzeichnis")
+
+\usepackage{amsmath}                          % Includes a plethora of mathematical packages 
+\usepackage{amssymb}                          % Source mathematical symbols like \sin
+\usepackage{amsthm}                           % Better theorems
+\usepackage{upgreek}                          % Use \Upomega to get a straight \Omega
+\usepackage{siunitx}                          % Unified support for si units
+
+\usepackage{ifthen}                           % Support better if statements in LaTeX
+
+% Support list of acronyms and glossary
+\usepackage[
+  toc,
+  nonumberlist,
+  acronyms,
+  shortcuts,
+  translate=babel
+]{glossaries}
+
+% Track the total count of different environments
+% Needs to be imported because LaTeX resets these counter on a chapter basis
+\usepackage[figure,table,lstlisting,xspace]{totalcount}
+
+% Annotate different information directly into the document
+\usepackage[
+  colorinlistoftodos,
+  prependcaption,
+  textsize=tiny
+]{todonotes}
+
+% -------------------------------------------------------------------
+%                 Useful packages (not used in template)
+% -------------------------------------------------------------------
+
+\usepackage{pdfpages}                         % Include existing PDFs into the work
+
+% Create electrical diagrams within LaTeX
+\usepackage[
+  european,
+  straightvoltages,
+  siunitx
+]{circuitikz}

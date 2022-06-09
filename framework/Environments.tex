@@ -1,0 +1,134 @@
+\newenvironment{HSCdocument}[1][]{
+
+  % Register different entries: glossary, nomenclature, acronyms
+  \makeglossaries
+  \include{Verzeichnisse/Worttrennungen}
+  \include{Verzeichnisse/Abkuerzungsverzeichnis}
+  \makenomenclature
+  \include{Verzeichnisse/Symbolverzeichnis}
+  \include{Verzeichnisse/Glossar}
+
+  % Register actual document
+  \document
+  \shorthandoff{"}
+
+  % Correctly determine type of document and format in respective header
+  \newcommand{\DocumentType}{#1}
+  \ifthenelse{\equal{#1}{Praxisbericht}}
+    {\include{framework/Header_Practice_Report}}
+    {
+      \ifthenelse{\equal{#1}{Bachelorarbeit}}
+        {\include{framework/Header}}
+        {
+          \ifthenelse{\equal{#1}{Masterarbeit}}
+            {\include{framework/Header}}
+            {
+              ERROR: Please use one of the following values as parameter
+              to the HSCdocument environment:\\
+              "Praxisbericht", "Bachelorarbeit", "Masterarbeit"
+            }
+        }
+  }
+
+  \newpage
+  \setcounter{page}{2}
+  \tableofcontents
+
+  \iftotalfigures
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{section}{\listfigurename}
+    \listoffigures
+  \fi
+
+  \iftotaltables
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{section}{\listtablename}
+    \listoftables
+  \fi
+
+  \iftotallstlistings
+    \newpage
+    \renewcommand{\lstlistlistingname}{Codebeispielverzeichnis}
+    \phantomsection
+    \addcontentsline{toc}{section}{\lstlistlistingname}
+    \lstlistoflistings
+  \fi
+
+  % Nomenclature ("Symbolverzeichnis")
+  \iftotalcountnomens
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{section}{\nomname}
+    \printnomenclature[1in]
+  \fi
+
+  % Acronyms
+  \iftotalcountacronyms
+    \newpage
+    \setglossarystyle{super}
+    \printglossary[type=\acronymtype,title=Abkürzungsverzeichnis]
+  \fi
+
+  \newpage
+}
+{
+  % Bibliography
+  \newpage
+  \bibliographystyle{alphadin}
+  \renewcommand{\refname}{Literaturverzeichnis}
+  \phantomsection
+  \addcontentsline{toc}{section}{\refname}
+  \bibliography{Verzeichnisse/Literaturverzeichnis}
+
+  % Glossary
+  \iftotalcountglossarys
+    \newpage
+    \setglossarystyle{altlist}
+    \printglossary
+  \fi
+
+  % Appendix
+  \IfFileExists{./Sektionen/Anhang.tex}{
+    \newpage
+    \appendix
+    \renewcommand{\thesection}{A\arabic{section}}
+    \include{Sektionen/Anhang}
+  }{}
+
+  % Declaration of Honor
+  \newpage
+  \phantomsection
+  \addcontentsline{toc}{section}{Ehrenwörtliche Erklärung}
+  \lhead{Ehrenwörtliche Erklärung}
+  \include{framework/Declaration_of_Honor}
+
+  % TODO list
+  \iftotalcounttodos
+    \listoftodos[TODOs]
+  \fi
+
+  \enddocument
+}
+
+% -------------------------------------------------------------------
+%                Simplified centered & colored tables
+% -------------------------------------------------------------------
+
+\newenvironment{colortable}[1]{
+  \begin{center}
+    \begin{tabular}{#1}
+    \hline
+    \rowcolor{Gray}
+}
+{
+    \hline
+    \end{tabular}
+  \end{center}
+}
+
+\newcommand{\tablecontent}{
+  \hline
+  \rowcolor{White}
+}
