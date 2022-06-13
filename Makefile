@@ -3,7 +3,7 @@
 full:
 	@pdflatex Arbeit && makeglossaries Arbeit && \
 	 makeindex Arbeit.nlo -s nomencl.ist -o Arbeit.nls && \
-	 pdflatex Arbeit && pdflatex Arbeit && bibtex Arbeit && \
+	 pdflatex Arbeit && bibtex Arbeit && \
 	 pdflatex Arbeit && pdflatex Arbeit
 	@-find . -name \*.aux -type f -delete
 

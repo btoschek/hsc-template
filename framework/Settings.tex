@@ -122,40 +122,41 @@
 
 \newcounter{countacronym}
 \DeclareTotalCounter{countacronym}
-\newcommand*{\acr}[1]{\acrshort{#1}\addtocounter{countacronym}{1}}
-\newcommand*{\Acr}[1]{\acrlong{#1}\addtocounter{countacronym}{1}}
+\newcommand*{\acr}[1]{\acrshort{#1}\stepcounter{countacronym}}
+\newcommand*{\Acr}[1]{\acrlong{#1}\stepcounter{countacronym}}
 
 \newcounter{countnomen}
 \DeclareTotalCounter{countnomen}
-\newcommand*{\nomen}[2]{\nomenclature{#1}{#2}\addtocounter{countnomen}{1}}
+\newcommand*{\nomen}[2]{\nomenclature{#1}{#2}\stepcounter{countnomen}}
 \newcommand{\nomunit}[1]{\renewcommand{\nomentryend}{\hspace*{\fill}#1}}
 \newcommand{\nomsi}[1]{\nomunit{[\si{#1}]}}
 
+% NOTE: Don't use glossary references in section names
 \newcounter{countglossary}
 \DeclareTotalCounter{countglossary}
 \let\oldGls\Gls
 \let\oldgls\gls
 \let\oldGlspl\Glspl
 \let\oldglspl\glspl
-\renewcommand*{\Gls}[1]{\oldGls{#1}\addtocounter{countglossary}{1}}
-\renewcommand*{\Glspl}[1]{\oldGlspl{#1}\addtocounter{countglossary}{1}}
-\renewcommand*{\gls}[1]{\oldgls{#1}\addtocounter{countglossary}{1}}
-\renewcommand*{\glspl}[1]{\oldglspl{#1}\addtocounter{countglossary}{1}}
+\renewcommand*{\Gls}[1]{\oldGls{#1}\stepcounter{countglossary}}
+\renewcommand*{\Glspl}[1]{\oldGlspl{#1}\stepcounter{countglossary}}
+\renewcommand*{\gls}[1]{\oldgls{#1}\stepcounter{countglossary}}
+\renewcommand*{\glspl}[1]{\oldglspl{#1}\stepcounter{countglossary}}
 
 % TODO annotations
 \newcounter{counttodo}
 \DeclareTotalCounter{counttodo}
 \newcommand{\note}[2][]{
   \todo[color=green!25,bordercolor=green,tickmarkheight=3pt,#1]{#2}
-  \addtocounter{counttodo}{1}
+  \stepcounter{counttodo}
 }
 \newcommand{\unsure}[2][]{
   \todo[color=Plum!25,bordercolor=Plum,tickmarkheight=3pt,#1]{#2}
-  \addtocounter{counttodo}{1}
+  \stepcounter{counttodo}
 }
 \newcommand{\change}[2][]{
   \todo[color=blue!25,bordercolor=blue,tickmarkheight=3pt,#1]{#2}
-  \addtocounter{counttodo}{1}
+  \stepcounter{counttodo}
 }
 
 \newcommand{\imgref}[1]{Abbildung \ref{#1}}
