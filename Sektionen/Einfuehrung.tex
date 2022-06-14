@@ -23,14 +23,14 @@ Zudem gibt es noch weitere Verzeichnisse, die automatisch eingelayoutet werden.
 \subsubsection{Abbildungen / Bilder}
 
 Auch das Abbildungsverzeichnis wird automatisch erstellt, hierzu muss eine Abbildung mit
-entsprechender Syntax eingebunden werden. In diesem Beispiel haben wir in Abbildung
-\ref{fig: Logo der Hochschule Coburg} das Logo der Hochschule Coburg als Bild eingebunden.
+entsprechender Syntax eingebunden werden. In diesem Beispiel wurde in Abbildung
+\ref{fig: Lenna} das bekannte Standardtestbild für Bildbearbeitung "Lenna" eingebunden.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{framework/Logo_HS_Coburg}
-  \caption{Logo der Hochschule Coburg}
-  \label{fig: Logo der Hochschule Coburg}
+  \includegraphics[width=.45\textwidth]{Lenna}
+  \caption{Standard-Testbild für Bildbearbeitung "Lenna"}
+  \label{fig: Lenna}
 \end{figure}
 
 Durch den "\textbackslash{}caption"-Befehl taucht die Grafik automatisch im Abbildungsverzeichnis auf.
@@ -181,6 +181,8 @@ Um Tabellen mit Kopfzeile einzufügen, kann die "\textbackslash{}colortable"-Umg
 \subsubsection{Referenzen}
 
 Um Referenzen auf Abbildungen syntaktisch zu verkürzen, stellt das Template
-ein eigenes Makro zur Verfügung: "\textbackslash{}imgref\{<LABEL>\}".
+ein eigenes Makro zur Verfügung: "\textbackslash{}imgref\{<LABEL>\}". Gleiches gilt
+für Tabellen ("\textbackslash{}tabref\{<LABEL>\}").
 
-Referenz auf Abbildung \ref{fig: Logo der Hochschule Coburg}: \imgref{fig: Logo der Hochschule Coburg}
+Referenz auf Abbildung \ref{fig: Lenna}: \imgref{fig: Lenna}\\
+Referenz auf Tabelle \ref{tab: Tabelle 2}: \tabref{tab: Tabelle 2}
