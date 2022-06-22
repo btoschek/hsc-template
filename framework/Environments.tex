@@ -1,4 +1,4 @@
-\newenvironment{HSCdocument}[1][]{
+\newcommand{\startHSCdocument}[1][]{
 
   % Register different entries: glossary, nomenclature, acronyms
   \makeglossaries
@@ -9,7 +9,7 @@
   \include{Verzeichnisse/Glossar}
 
   % Register actual document
-  \document
+  \begin{document}
   \shorthandoff{"}
 
   % Correctly determine type of document and format in respective header
@@ -76,7 +76,7 @@
 
   \newpage
 }
-{
+\newcommand{\finishHSCdocument}{
   % Bibliography
   \newpage
   \bibliographystyle{alphadin}
@@ -112,7 +112,7 @@
     \listoftodos[TODOs]
   \fi
 
-  \enddocument
+  \end{document}
 }
 
 % -------------------------------------------------------------------
