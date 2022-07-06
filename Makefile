@@ -14,7 +14,7 @@ else
 	    *.idx *.ilg *.ist *.lof *.log *.lol *.lot *.nlo *.nls *.out *.tdo *.toc 2>/dev/null
 endif
 
-full:
+all:
 	@pdflatex Arbeit && makeglossaries Arbeit && \
 	 makeindex Arbeit.nlo -s nomencl.ist -o Arbeit.nls && \
 	 pdflatex Arbeit && bibtex Arbeit && \
@@ -29,4 +29,4 @@ clean:
 	@$(CLEAN_AUX)
 	@$(CLEAN_IDX)
 
-all: full clean
+full: all clean
