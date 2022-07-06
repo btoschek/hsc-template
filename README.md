@@ -70,7 +70,7 @@ Install the complete TeXLive suite from https://tug.org/texlive/windows.html#ins
 Compiling your document from scratch is as easy as running the following in your terminal.
 
 ```sh
-make full
+make all
 ```
 
 If you just want to rebuild the document and you haven't changed the content of index files
