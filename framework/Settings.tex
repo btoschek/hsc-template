@@ -159,5 +159,8 @@
   \stepcounter{counttodo}
 }
 
-\newcommand{\imgref}[1]{Abbildung~\ref{#1}}
-\newcommand{\tabref}[1]{Tabelle~\ref{#1}}
+\newcommand{\imgref}[1]{\hyperref[#1]{Abbildung~\getrefnumber{#1}}}
+\newcommand{\tabref}[1]{\hyperref[#1]{Tabelle~\getrefnumber{#1}}}
+\newcommand{\coderef}[1]{\hyperref[#1]{Code~\getrefnumber{#1}}}
+\newcommand{\mathref}[1]{\hyperref[#1]{Gleichung~\getrefnumber{#1}}}
+\newcommand{\secref}[1]{\hyperref[#1]{Abschnitt~\getrefnumber{#1}}}
