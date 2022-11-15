@@ -1,7 +1,7 @@
 # Document Template HS Coburg
 
 This repository provides a student-maintained and improved version of the
-of the so far FEIF document template. The template got reworked from
+so far available FEIF document template. The template got reworked from
 the ground up, improving the author's experience and providing a cleaner
 interface to begin with.
 
