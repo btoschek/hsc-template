@@ -12,23 +12,43 @@
   \begin{document}
   \shorthandoff{"}
 
+  % ===========================================================================
+  %                             Document header
+  % ===========================================================================
+
+  \newgeometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm
+  }
+
   % Correctly determine type of document and format in respective header
   \newcommand{\DocumentType}{#1}
-  \ifthenelse{\equal{#1}{Praxisbericht}}
-    {\include{framework/Header_Practice_Report}}
-    {
-      \ifthenelse{\equal{#1}{Bachelorarbeit}}
-        {\include{framework/Header}}
-        {
-          \ifthenelse{\equal{#1}{Masterarbeit}}
-            {\include{framework/Header}}
-            {
-              ERROR: Please use one of the following values as parameter
-              to the HSCdocument environment:\\
-              "Praxisbericht", "Bachelorarbeit", "Masterarbeit"
-            }
-        }
-  }
+
+  \begin{titlepage}
+    \ifthenelse{\equal{#1}{Praxisbericht}}
+      {\include{framework/Header_Practice_Report}}
+      {
+        \ifthenelse{\equal{#1}{Bachelorarbeit}}
+          {\include{framework/Header}}
+          {
+            \ifthenelse{\equal{#1}{Masterarbeit}}
+              {\include{framework/Header}}
+              {
+                ERROR: Please use one of the following values as parameter
+                to the HSCdocument environment:\\
+                "Praxisbericht", "Bachelorarbeit", "Masterarbeit"
+              }
+          }
+      }
+  \end{titlepage}
+
+  \restoregeometry
+
+  % ===========================================================================
+  %                              Page Ordering
+  % ===========================================================================
 
   % Set image path to "Bilder" subdirectory
   \graphicspath{{Bilder/}}
@@ -76,6 +96,7 @@
 
   \newpage
 }
+
 \newcommand{\finishHSCdocument}{
   % Bibliography
   \newpage
@@ -115,9 +136,9 @@
   \end{document}
 }
 
-% -------------------------------------------------------------------
-%                Simplified centered & colored tables
-% -------------------------------------------------------------------
+% ===========================================================================
+%                   Simplified centered & colored tables
+% ===========================================================================
 
 \newenvironment{colortable}[1]{
   \begin{center}
