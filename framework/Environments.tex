@@ -36,9 +36,16 @@
             \ifthenelse{\equal{#1}{Masterarbeit}}
               {\include{framework/Header}}
               {
-                ERROR: Please use one of the following values as parameter
-                to the HSCdocument environment:\\
-                "Praxisbericht", "Bachelorarbeit", "Masterarbeit"
+                \IfFileExists{./CustomHeader.tex}{
+                  \include{CustomHeader}
+                }{
+                  ERROR: Please use one of the following values as parameter
+                  to the HSCdocument environment:\\
+                  "Praxisbericht", "Bachelorarbeit", "Masterarbeit"\\
+
+                  To create your own document header, just create a file
+                  "CustomHeader.tex" in the document root.
+                }
               }
           }
       }
