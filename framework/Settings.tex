@@ -24,8 +24,12 @@
 
 \setcounter{secnumdepth}{3}                             % Only allow nesting 3 layers (down to subsubsections)
 
-% Set convention to german (comma instead of point delimiter for floats)
-\sisetup{locale = DE}
+% Unit-related setup for siunitx
+\sisetup{
+  locale=DE,                   % Use German notation (comma instead of point delimiter for floats)
+  per-mode=fraction,           % Switch display to use \frac instead of x^{-1}
+  fraction-function=\tfrac,    % Use amsmath's tfrac macro for unit fractions
+}
 
 % -------------------------------------------------------------------
 %                     Usability & visual changes
