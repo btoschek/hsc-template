@@ -57,12 +57,12 @@
 
 \renewcommand{\UrlFont}{\color{blue}\rmfamily\itshape}  % URLs should be displayed in blue
 \renewcommand{\dateseparator}{.}                        % Dates are written like 01.01.1970, not 01-01-1970
-\renewcommand{\nomname}{Symbolverzeichnis}              % Nomenclature in german is "Symbolverzeichnis"
 
 \addto{\captionsngerman}{
   \renewcommand*{\figurename}{Abb.}                     % Figures should be displayed as "Abb. x"
-  \renewcommand*{\tablename}{Tab.}                      % Tables should be displayed as "Tab. x"
-  \renewcommand*{\lstlistingname}{Code}                 % Code should be displayed as "Code x"
+  \renewcommand*{\tablename}{Tab.}                      % Tables  should be displayed as "Tab. x"
+  \renewcommand*{\lstlistingname}{Code}                 % Code    should be displayed as "Code x"
+  \renewcommand*{\nomname}{Symbolverzeichnis}           % Nomenclature in German is "Symbolverzeichnis"
 }
 
 % -------------------------------------------------------------------
@@ -95,13 +95,13 @@
 % -------------------------------------------------------------------
 
 % Figures
-\renewcommand{\cftfigpresnum}{Abb.~}
+\renewcommand{\cftfigpresnum}{\figurename~}
 \renewcommand{\cftfigaftersnum}{:}
 \setlength{\cftfignumwidth}{2cm}
 \setlength{\cftfigindent}{0cm}
 
 % Tables
-\renewcommand{\cfttabpresnum}{Tab.~}
+\renewcommand{\cfttabpresnum}{\tablename~}
 \renewcommand{\cfttabaftersnum}{:}
 \setlength{\cfttabnumwidth}{2cm}
 \setlength{\cfttabindent}{0cm}
