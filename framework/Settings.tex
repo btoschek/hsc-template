@@ -135,17 +135,13 @@
 \newcommand{\nomunit}[1]{\renewcommand{\nomentryend}{\hspace*{\fill}#1}}
 \newcommand{\nomsi}[1]{\nomunit{[\si{#1}]}}
 
-% NOTE: Don't use glossary references in section names
+% Count number of references to the glossary
 \newcounter{countglossary}
 \DeclareTotalCounter{countglossary}
-\let\oldGls\Gls
-\let\oldgls\gls
-\let\oldGlspl\Glspl
-\let\oldglspl\glspl
-\renewcommand*{\Gls}[1]{\oldGls{#1}\stepcounter{countglossary}}
-\renewcommand*{\Glspl}[1]{\oldGlspl{#1}\stepcounter{countglossary}}
-\renewcommand*{\gls}[1]{\oldgls{#1}\stepcounter{countglossary}}
-\renewcommand*{\glspl}[1]{\oldglspl{#1}\stepcounter{countglossary}}
+\pretocmd{\Gls}{\stepcounter{countglossary}}{}{}
+\pretocmd{\gls}{\stepcounter{countglossary}}{}{}
+\pretocmd{\Glspl}{\stepcounter{countglossary}}{}{}
+\pretocmd{\glspl}{\stepcounter{countglossary}}{}{}
 
 % TODO annotations
 \newcounter{counttodo}
