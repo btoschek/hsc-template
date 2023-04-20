@@ -2,6 +2,8 @@
 
 # Powershell clean commands
 ifeq ($(OS),Windows_NT)
+	SHELL := powershell.exe
+	.SHELLFLAGS := -NoProfile -Command 
 	CLEAN_AUX +=-Get-ChildItem * -Include *.aux -Recurse | Remove-Item
 	CLEAN_IDX +=-Get-ChildItem * -Include *.acn,*.acr,*.alg,*.bbl,*.blg, \
 	            *.glg,*.glo,*.gls,*.glsdefs,*.idx,*.ilg,*.ist,*.listing,*.lof,*.log, \
