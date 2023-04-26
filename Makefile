@@ -2,8 +2,9 @@
 
 # Windows cmd clean commands
 ifeq ($(OS),Windows_NT)
+	SHELL := cmd.exe
 	CLEAN_AUX = del /s *.aux
-	CLEAN_IDX = del /s *.acn *.acr *.alg *.bbl *.blg *.glg *.glo *.gls *.glsdefs *.idx *.ilg *.ist *.listing *.lof *.log *.lol *.lot *.nlo *.nls *.out *.tdo *.toc 
+	CLEAN_IDX = del /s *.acn *.acr *.alg *.bbl *.blg *.glg *.glo *.gls *.glsdefs *.idx *.ilg *.ist *.listing *.lof *.log *.lol *.lot *.nlo *.nls *.out *.tdo *.toc
 
 # Unix clean commands
 else
