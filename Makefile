@@ -1,11 +1,10 @@
 .DEFAULT_GOAL := recompile_latex
 
-# Powershell clean commands
+# Windows cmd clean commands
 ifeq ($(OS),Windows_NT)
-	CLEAN_AUX +=-Get-ChildItem * -Include *.aux -Recurse | Remove-Item
-	CLEAN_IDX +=-Get-ChildItem * -Include *.acn,*.acr,*.alg,*.bbl,*.blg, \
-	            *.glg,*.glo,*.gls,*.glsdefs,*.idx,*.ilg,*.ist,*.listing,*.lof,*.log, \
-	            *.lol,*.lot,*.nlo,*.nls,*.out,*.tdo,*.toc -Recurse | Remove-Item
+	SHELL := cmd.exe
+	CLEAN_AUX = del /s *.aux
+	CLEAN_IDX = del /s *.acn *.acr *.alg *.bbl *.blg *.glg *.glo *.gls *.glsdefs *.idx *.ilg *.ist *.listing *.lof *.log *.lol *.lot *.nlo *.nls *.out *.tdo *.toc
 
 # Unix clean commands
 else
