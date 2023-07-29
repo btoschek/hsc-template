@@ -19,7 +19,18 @@
   \end{document}
 }
 
+\makeatletter
+\define@key{HSCDocument@keys}{preset}{\def\DocumentType{#1}}
+\makeatother
+
 \newenvironment{HSCDocument}[1][]{
+
+  \makeatletter
+  \setkeys{HSCDocument@keys}{
+    preset=Custom,
+    #1
+  }
+  \makeatother
 
   % Don't display "a as ä etc.
   \shorthandoff{"}
@@ -35,17 +46,14 @@
     bottom=2.5cm
   }
 
-  % Correctly determine type of document and format in respective header
-  \newcommand{\DocumentType}{#1}
-
   \begin{titlepage}
-    \ifthenelse{\equal{#1}{Praxisbericht}}
+    \ifthenelse{\equal{\DocumentType}{Praxisbericht}}
       {\include{framework/Header_Practice_Report}}
       {
-        \ifthenelse{\equal{#1}{Bachelorarbeit}}
+        \ifthenelse{\equal{\DocumentType}{Bachelorarbeit}}
           {\include{framework/Header}}
           {
-            \ifthenelse{\equal{#1}{Masterarbeit}}
+            \ifthenelse{\equal{\DocumentType}{Masterarbeit}}
               {\include{framework/Header}}
               {
                 \IfFileExists{./CustomHeader.tex}{
