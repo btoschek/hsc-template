@@ -1,4 +1,8 @@
-\newcommand{\startHSCdocument}[1][]{
+% ===========================================================================
+%           Wrap document environment with HSCDocument environment
+% ===========================================================================
+
+\AddToHook{env/HSCDocument/before}{
 
   % Register different entries: glossary, nomenclature, acronyms
   \makeglossaries
@@ -8,8 +12,16 @@
   \include{Verzeichnisse/Symbolverzeichnis}
   \include{Verzeichnisse/Glossar}
 
-  % Register actual document
   \begin{document}
+}
+
+\AddToHook{env/HSCDocument/after}{
+  \end{document}
+}
+
+\newenvironment{HSCDocument}[1][]{
+
+  % Don't display "a as ä etc.
   \shorthandoff{"}
 
   % ===========================================================================
@@ -102,8 +114,7 @@
 
   \newpage
 }
-
-\newcommand{\finishHSCdocument}{
+{
   % Bibliography
   \iftotalcountcitations
     \newpage
@@ -139,8 +150,6 @@
   \iftotalcounttodos
     \listoftodos[TODOs]
   \fi
-
-  \end{document}
 }
 
 % ===========================================================================
