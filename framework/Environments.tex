@@ -80,7 +80,6 @@
 
   \iftotallstlistings
     \newpage
-    \renewcommand{\lstlistlistingname}{Codebeispielverzeichnis}
     \phantomsection
     \addcontentsline{toc}{section}{\lstlistlistingname}
     \lstlistoflistings
@@ -98,7 +97,7 @@
   \iftotalcountacronyms
     \newpage
     \setglossarystyle{super}
-    \printglossary[type=\acronymtype,title=Abkürzungsverzeichnis]
+    \printglossary[type=\acronymtype]
   \fi
 
   \newpage
@@ -109,7 +108,6 @@
   \iftotalcountcitations
     \newpage
     \bibliographystyle{alphadin}
-    \renewcommand{\refname}{Literaturverzeichnis}
     \phantomsection
     \addcontentsline{toc}{section}{\refname}
     \bibliography{Verzeichnisse/Literaturverzeichnis}
@@ -133,8 +131,8 @@
   % Declaration of Honor
   \newpage
   \phantomsection
-  \addcontentsline{toc}{section}{Ehrenwörtliche Erklärung}
-  \lhead{Ehrenwörtliche Erklärung}
+  \addcontentsline{toc}{section}{\declarationname}
+  \lhead{\declarationname}
   \include{framework/Declaration_of_Honor}
 
   % TODO list
