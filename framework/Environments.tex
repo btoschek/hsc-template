@@ -106,12 +106,14 @@
 
 \newcommand{\finishHSCdocument}{
   % Bibliography
-  \newpage
-  \bibliographystyle{alphadin}
-  \renewcommand{\refname}{Literaturverzeichnis}
-  \phantomsection
-  \addcontentsline{toc}{section}{\refname}
-  \bibliography{Verzeichnisse/Literaturverzeichnis}
+  \iftotalcountcitations
+    \newpage
+    \bibliographystyle{alphadin}
+    \renewcommand{\refname}{Literaturverzeichnis}
+    \phantomsection
+    \addcontentsline{toc}{section}{\refname}
+    \bibliography{Verzeichnisse/Literaturverzeichnis}
+  \fi
 
   % Glossary
   \iftotalcountglossarys

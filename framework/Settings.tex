@@ -143,6 +143,11 @@
 \pretocmd{\Glspl}{\stepcounter{countglossary}}{}{}
 \pretocmd{\glspl}{\stepcounter{countglossary}}{}{}
 
+% Count number of citations
+\newcounter{countcitation}
+\DeclareTotalCounter{countcitation}
+\pretocmd{\cite}{\stepcounter{countcitation}}{}{}
+
 % TODO annotations
 \newcounter{counttodo}
 \DeclareTotalCounter{counttodo}
