@@ -13,19 +13,36 @@ else
 	    *.idx *.ilg *.ist *.listing *.lof *.log *.lol *.lot *.nlo *.nls *.out *.tdo *.toc 2>/dev/null
 endif
 
-all:
-	@-pdflatex Arbeit && makeglossaries Arbeit && \
-	 makeindex Arbeit.nlo -s nomencl.ist -o Arbeit.nls && \
-	 pdflatex Arbeit && bibtex Arbeit & \
-	 pdflatex Arbeit && pdflatex Arbeit
-	@$(CLEAN_AUX)
 
-recompile_latex:
-	@pdflatex Arbeit && pdflatex Arbeit
+SOURCES      := $(shell find . -name '*.tex' -not -path './Verzeichnisse/*') # Document sources
+INDICES      := $(shell find ./Verzeichnisse -name '*.tex')                  # Index files
+BIBLIOGRAPHY := ./Verzeichnisse/Literaturverzeichnis.bib
+
+NAME         := Arbeit
+
+# Generate glossary entries file
+$(NAME).glo: $(INDICES)
+	pdflatex $(NAME)
+	-makeglossaries $(NAME)
+
+# Generate index file
+$(NAME).nls: $(INDICES)
+	-makeindex $(NAME).nlo -s nomencl.ist -o $(NAME).nls
+
+# Generate bibliography index file
+$(NAME).bbl: $(BIBLIOGRAPHY)
+	pdflatex $(NAME)
+	-bibtex $(NAME)
+
+# Compile document & link images / create list of figures etc.
+recompile_latex: $(SOURCES)
+	pdflatex $(NAME)
+	pdflatex $(NAME)
 
 .PHONY: clean
 clean:
 	@$(CLEAN_AUX)
 	@$(CLEAN_IDX)
 
+all: $(NAME).glo $(NAME).nls $(NAME).bbl recompile_latex
 full: all clean
