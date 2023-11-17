@@ -170,6 +170,10 @@
   \todo[color=blue!25,bordercolor=blue,tickmarkheight=3pt,#1]{#2}
   \stepcounter{counttodo}
 }
+\newcommand{\missing}[2][]{
+  \todo[color=red!25,bordercolor=red,tickmarkheight=3pt,#1]{#2}
+  \stepcounter{counttodo}
+}
 
 \newcommand{\imgref}[1]{\hyperref[#1]{Abbildung~\getrefnumber{#1}}}
 \newcommand{\tabref}[1]{\hyperref[#1]{Tabelle~\getrefnumber{#1}}}
