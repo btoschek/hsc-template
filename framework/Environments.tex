@@ -73,6 +73,9 @@
 
   \restoregeometry
 
+  % Header is considered the 1st page
+  \addtocounter{page}{1}
+
   % ===========================================================================
   %                              Page Ordering
   % ===========================================================================
@@ -80,8 +83,23 @@
   % Set image path to "Bilder" subdirectory
   \graphicspath{{Bilder/}}
 
+  % Optional notice to the reader ("Vermerk")
+  \IfFileExists{./Sektionen/Vermerk.tex}{
+    \newpage
+    \include{Sektionen/Vermerk}
+  }{}
+
+  % Abstract
+  \IfFileExists{./Sektionen/Abstract.tex}{
+    \newpage
+    \fancypagestyle{abstract}{
+      \fancyhead[L]{Abstract}
+    }
+    \thispagestyle{abstract}
+    \include{Sektionen/Abstract}
+  }{}
+
   \newpage
-  \setcounter{page}{2}
   \tableofcontents
 
   \iftotalfigures
