@@ -32,6 +32,7 @@
 \usepackage{graphicx}                         % Support including graphics environments for images
 \usepackage{caption}                          % Provide greater customization around captions
 \usepackage{subcaption}                       % Caption support for subfigures
+\usepackage{pdfpages}                         % Include existing PDFs into the work
 
 \usepackage[onehalfspacing]{setspace}         % Set line spacing to be 1.5x the default
 \usepackage{listings}                         % Code block support for LaTeX
@@ -77,12 +78,13 @@
 %                 Useful packages (not used in template)
 % -------------------------------------------------------------------
 
-\usepackage{pdfpages}                         % Include existing PDFs into the work
-
-% Create electrical diagrams within LaTeX
+% Create electrical diagrams from within LaTeX
 \usepackage[
   european,
   oldvoltagedirection,
   straightvoltages,
   siunitx
 ]{circuitikz}
+
+% Annotate images with standard tikz macros
+\usepackage{tikz-imagelabels}
