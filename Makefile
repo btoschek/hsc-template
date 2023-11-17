@@ -19,11 +19,11 @@ $(BUILD_DIR):
 # Generate glossary entries file
 $(BUILD_DIR)/$(NAME).glo: $(BUILD_DIR) $(GLOSSARY)
 	pdflatex $(ARGS_PDFLATEX) $(NAME)
-	-makeglossaries $(NAME) -d $(BUILD_DIR)
+	-cd $(BUILD_DIR) && makeglossaries $(NAME)
 
 # Generate index file
 $(BUILD_DIR)/$(NAME).nls: $(BUILD_DIR) $(INDICES) $(SOURCES)
-	-makeindex $(BUILD_DIR)/$(NAME).nlo -s nomencl.ist -o $(BUILD_DIR)/$(NAME).nls
+	-cd $(BUILD_DIR) && makeindex $(NAME).nlo -s nomencl.ist -o $(NAME).nls
 
 # Generate bibliography index file
 $(BUILD_DIR)/$(NAME).bbl: $(BUILD_DIR) $(BIBLIOGRAPHY)
