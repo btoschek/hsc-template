@@ -72,6 +72,12 @@
   \renewcommand*{\declarationname}{Ehrenwörtliche Erklärung}   % Declaration of honor
 }
 
+\addto{\extrasngerman}{%
+  \def\sectionautorefname{Kapitel}%                              1st level sections should be called "Kapitel"
+  \def\subsectionautorefname{Abschnitt}%                         2nd level sections should be called "Abschnitt"
+  \def\subsubsectionautorefname{Unterabschnitt}%                 3rd level sections should be called "Unterabschnitt"
+}
+
 % -------------------------------------------------------------------
 %                        Code listing setup
 % -------------------------------------------------------------------
@@ -179,4 +185,4 @@
 \newcommand{\tabref}[1]{\hyperref[#1]{Tabelle~\getrefnumber{#1}}}
 \newcommand{\coderef}[1]{\hyperref[#1]{Code~\getrefnumber{#1}}}
 \newcommand{\mathref}[1]{\hyperref[#1]{Gleichung~\getrefnumber{#1}}}
-\newcommand{\secref}[1]{\hyperref[#1]{Abschnitt~\getrefnumber{#1}}}
+\newcommand{\secref}[1]{\autoref{#1}}
