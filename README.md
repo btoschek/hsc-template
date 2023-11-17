@@ -35,22 +35,9 @@ you need the following programs installed on your system:
 
 ### Installation on Unix-like systems (Linux, MacOS)
 
-Installation on Debian-based distributions:
-
-```sh
-apt-get update
-apt-get install make
-apt-get install texlive-full
-```
-
-Installation on Arch-based distributions: (Untested, to be safe install
-`texlive-lang` as well)
-
-```sh
-pacman -Syyuu
-pacman -S make
-pacman -S texlive-most
-```
+Due to most distributions having outdated versions of texlive in their repositories,
+you are encouraged to download the texlive package as discribed over on
+the [official website](https://tug.org/texlive/quickinstall.html).
 
 ### Installation on Windows
 
