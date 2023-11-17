@@ -1,48 +1,47 @@
-.DEFAULT_GOAL := recompile_latex
+.DEFAULT_GOAL := all
 
-# Windows cmd clean commands
-ifeq ($(OS),Windows_NT)
-	SHELL := cmd.exe
-	CLEAN_AUX = del /s *.aux
-	CLEAN_IDX = del /s *.acn *.acr *.alg *.bbl *.blg *.glg *.glo *.gls *.glsdefs *.idx *.ilg *.ist *.listing *.lof *.log *.lol *.lot *.nlo *.nls *.out *.tdo *.toc
+# Source files
+SOURCES       := $(shell find . -name '*.tex' -not -path './Verzeichnisse/*') # Document sources
+INDICES       := $(shell find ./Verzeichnisse -name '*.tex')                  # Index files
+BIBLIOGRAPHY  := Verzeichnisse/Literaturverzeichnis.bib                       # Bibliography
+GLOSSARY      := Verzeichnisse/Glossar.tex                                    # Glossary
 
-# Unix clean commands
-else
-	CLEAN_AUX +=-find . -name \*.aux -type f -delete
-	CLEAN_IDX +=-rm -f *.acn *.acr *.alg *.bbl *.blg *.glg *.glo *.gls *.glsdefs \
-	    *.idx *.ilg *.ist *.listing *.lof *.log *.lol *.lot *.nlo *.nls *.out *.tdo *.toc 2>/dev/null
-endif
+NAME          := Arbeit
+BUILD_DIR     := .build
+ARGS_PDFLATEX := -output-directory=$(BUILD_DIR)
 
-
-SOURCES      := $(shell find . -name '*.tex' -not -path './Verzeichnisse/*') # Document sources
-INDICES      := $(shell find ./Verzeichnisse -name '*.tex')                  # Index files
-BIBLIOGRAPHY := ./Verzeichnisse/Literaturverzeichnis.bib
-
-NAME         := Arbeit
+# Generate build directory (including child directories) if non-existant
+$(BUILD_DIR):
+	@for DIR in $(shell find . -maxdepth 1 -mindepth 1 -type d -not -name '.git' -exec basename '{}' \;); do \
+		mkdir -p ${BUILD_DIR}/$$DIR; \
+	done
 
 # Generate glossary entries file
-$(NAME).glo: $(INDICES)
-	pdflatex $(NAME)
-	-makeglossaries $(NAME)
+$(BUILD_DIR)/$(NAME).glo: $(BUILD_DIR) $(GLOSSARY)
+	pdflatex $(ARGS_PDFLATEX) $(NAME)
+	-makeglossaries $(NAME) -d $(BUILD_DIR)
 
 # Generate index file
-$(NAME).nls: $(INDICES)
-	-makeindex $(NAME).nlo -s nomencl.ist -o $(NAME).nls
+$(BUILD_DIR)/$(NAME).nls: $(BUILD_DIR) $(INDICES) $(SOURCES)
+	-makeindex $(BUILD_DIR)/$(NAME).nlo -s nomencl.ist -o $(BUILD_DIR)/$(NAME).nls
 
 # Generate bibliography index file
-$(NAME).bbl: $(BIBLIOGRAPHY)
-	pdflatex $(NAME)
-	-bibtex $(NAME)
+$(BUILD_DIR)/$(NAME).bbl: $(BUILD_DIR) $(BIBLIOGRAPHY)
+	pdflatex $(ARGS_PDFLATEX) $(NAME)
+	cp $(BIBLIOGRAPHY) $(BUILD_DIR)/$(BIBLIOGRAPHY)
+	-cd $(BUILD_DIR) && bibtex $(NAME)
 
 # Compile document & link images / create list of figures etc.
-recompile_latex: $(SOURCES)
-	pdflatex $(NAME)
-	pdflatex $(NAME)
+.PHONY: recompile_latex
+recompile_latex: $(BUILD_DIR) $(SOURCES)
+	pdflatex $(ARGS_PDFLATEX) $(NAME)
+	pdflatex $(ARGS_PDFLATEX) $(NAME)
+	@mv $(BUILD_DIR)/$(NAME).pdf .
 
 .PHONY: clean
 clean:
-	@$(CLEAN_AUX)
-	@$(CLEAN_IDX)
+	rm -r $(BUILD_DIR)
 
-all: $(NAME).glo $(NAME).nls $(NAME).bbl recompile_latex
+.PHONY: all
+all: $(BUILD_DIR)/$(NAME).glo $(BUILD_DIR)/$(NAME).nls $(BUILD_DIR)/$(NAME).bbl recompile_latex
 full: all clean
