@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := recompile_latex
+.DEFAULT_GOAL := default
 
 # Windows cmd clean commands
 ifeq ($(OS),Windows_NT)
@@ -14,14 +14,18 @@ else
 endif
 
 all:
-	@-pdflatex Arbeit && makeglossaries Arbeit && \
+	@-pdflatex --shell-escape Arbeit && makeglossaries Arbeit && \
 	 makeindex Arbeit.nlo -s nomencl.ist -o Arbeit.nls && \
-	 pdflatex Arbeit && bibtex Arbeit & \
-	 pdflatex Arbeit && pdflatex Arbeit
+	 pdflatex --shell-escape Arbeit && bibtex Arbeit & \
+	 pdflatex --shell-escape Arbeit && pdflatex --shell-escape Arbeit
 	@$(CLEAN_AUX)
 
-recompile_latex:
-	@pdflatex Arbeit && pdflatex Arbeit
+recompile_latex_dual: compile_latex compile_latex
+
+compile_latex:
+	@pdflatex --shell-escape Arbeit
+
+default: recompile_latex_dual clean	
 
 .PHONY: clean
 clean:
