@@ -22,4 +22,5 @@
 *.tdo
 *.toc
 .vscode/*
+*.run.xml
 *.bcf
