@@ -21,3 +21,5 @@
 *.out
 *.tdo
 *.toc
+.vscode/*
+svg-inkscape/*
