@@ -16,7 +16,7 @@ endif
 all:
 	@-pdflatex Arbeit && makeglossaries Arbeit && \
 	 makeindex Arbeit.nlo -s nomencl.ist -o Arbeit.nls && \
-	 pdflatex Arbeit && bibtex Arbeit & \
+	 pdflatex Arbeit && biber Arbeit & \
 	 pdflatex Arbeit && pdflatex Arbeit
 	@$(CLEAN_AUX)
 
