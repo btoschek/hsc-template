@@ -32,9 +32,9 @@ ARGS_PDFLATEX := -output-directory=$(BUILD_DIR) --shell-escape
 # Generate build directory (including child directories) if non-existant
 $(BUILD_DIR):
 ifeq ($(OS),Windows_NT)
-	powershell -Command "Get-ChildItem -Directory -Exclude '.git' | ForEach-Object { New-Item -ItemType Directory -Force -Path "${BUILD_DIR}" -Name $$_.Name }"	
+	powershell -Command "Get-ChildItem -Directory -Exclude '.*' | ForEach-Object { New-Item -ItemType Directory -Force -Path "${BUILD_DIR}" -Name $$_.Name }"	
 else
-	@for DIR in $(shell find . -maxdepth 1 -mindepth 1 -type d -not -name '.git' -exec basename '{}' \;); do \
+	@for DIR in $(shell find . -maxdepth 1 -mindepth 1 -type d -not -name '.*' -exec basename '{}' \;); do \
 		mkdir -p ${BUILD_DIR}/$$DIR; \
 	done
 endif
