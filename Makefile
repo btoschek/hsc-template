@@ -1,20 +1,43 @@
 .DEFAULT_GOAL := all
 
+# Windows commands
+ifeq ($(OS),Windows_NT)
+	COPY_COMMAND := copy
+	RM_COMMAND   := powershell -Command "Remove-Item -Recurse"
+	MOVE_COMMAND := move /Y
+	SEP := \\
+# Unix-like commands
+else
+	COPY_COMMAND := cp
+	RM_COMMAND   := rm -r
+	MOVE_COMMAND := mv
+	SEP := /
+endif
+
 # Source files
-SOURCES       := $(shell find . -name '*.tex' -not -path './Verzeichnisse/*') # Document sources
-INDICES       := $(shell find ./Verzeichnisse -name '*.tex')                  # Index files
-BIBLIOGRAPHY  := Verzeichnisse/Literaturverzeichnis.bib                       # Bibliography
-GLOSSARY      := Verzeichnisse/Glossar.tex                                    # Glossary
+ifeq ($(OS),Windows_NT)
+	SOURCES       := $(powershell -Command "Get-ChildItem -Recurse -Filter *.tex | Where-Object { $_.FullName -notlike '*\\Verzeichnisse\\*' } | ForEach-Object { $_.FullName }") 	# Document sources (Windows)
+	INDICES       := $(powershell -Command "Get-ChildItem -Recurse -Filter *.tex -Path .\Verzeichnisse | ForEach-Object { $_.FullName }")                 							# Index files (Windows)
+else
+	SOURCES       := $(shell find . -name '*.tex' -not -path './Verzeichnisse/*')																									# Document sources (Unix-like)
+	INDICES       := $(shell find ./Verzeichnisse -name '*.tex')                  			 																						# Index files (Unix-like)
+endif
+BIBLIOGRAPHY  := Verzeichnisse/Literaturverzeichnis.bib                      			 																							# Bibliography
+GLOSSARY      := Verzeichnisse/Glossar.tex                                   			 																							# Glossary
 
 NAME          := Arbeit
 BUILD_DIR     := .build
-ARGS_PDFLATEX := -output-directory=$(BUILD_DIR)
+ARGS_PDFLATEX := -output-directory=$(BUILD_DIR) --shell-escape
 
 # Generate build directory (including child directories) if non-existant
 $(BUILD_DIR):
+ifeq ($(OS),Windows_NT)
+	powershell -Command "Get-ChildItem -Directory -Exclude '.git' | ForEach-Object { New-Item -ItemType Directory -Force -Path "${BUILD_DIR}" -Name $$_.Name }"	
+else
 	@for DIR in $(shell find . -maxdepth 1 -mindepth 1 -type d -not -name '.git' -exec basename '{}' \;); do \
 		mkdir -p ${BUILD_DIR}/$$DIR; \
 	done
+endif
 
 # Generate glossary entries file
 $(BUILD_DIR)/$(NAME).glo: $(BUILD_DIR) $(GLOSSARY)
@@ -28,7 +51,7 @@ $(BUILD_DIR)/$(NAME).nls: $(BUILD_DIR) $(INDICES) $(SOURCES)
 # Generate bibliography index file
 $(BUILD_DIR)/$(NAME).bbl: $(BUILD_DIR) $(BIBLIOGRAPHY)
 	pdflatex $(ARGS_PDFLATEX) $(NAME)
-	cp $(BIBLIOGRAPHY) $(BUILD_DIR)/$(BIBLIOGRAPHY)
+	$(COPY_COMMAND) $(BIBLIOGRAPHY) $(BUILD_DIR)$(SEP)$(BIBLIOGRAPHY)
 	-cd $(BUILD_DIR) && bibtex $(NAME)
 
 # Compile document & link images / create list of figures etc.
@@ -36,11 +59,11 @@ $(BUILD_DIR)/$(NAME).bbl: $(BUILD_DIR) $(BIBLIOGRAPHY)
 recompile_latex: $(BUILD_DIR) $(SOURCES)
 	pdflatex $(ARGS_PDFLATEX) $(NAME)
 	pdflatex $(ARGS_PDFLATEX) $(NAME)
-	@mv $(BUILD_DIR)/$(NAME).pdf .
+	@$(MOVE_COMMAND) $(BUILD_DIR)$(SEP)$(NAME).pdf .
 
 .PHONY: clean
 clean:
-	rm -r $(BUILD_DIR)
+	$(RM_COMMAND) $(BUILD_DIR)
 
 .PHONY: all
 all: $(BUILD_DIR)/$(NAME).glo $(BUILD_DIR)/$(NAME).nls $(BUILD_DIR)/$(NAME).bbl recompile_latex
