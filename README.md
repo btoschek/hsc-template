@@ -71,14 +71,11 @@ Install the complete TeXLive suite from https://tug.org/texlive/windows.html#ins
 
 ## Compiling your document
 
-Compiling your document from scratch is as easy as running the following in your terminal.
+Compiling your document is as easy as running the following command in your terminal.
 
 ```sh
-make all
+make
 ```
-
-If you just want to rebuild the document and you haven't changed the content of index files
-in `Verzeichnisse/`, call `make` without any arguments.
 
 To remove temporary files and indices used during compilation, run:
 
