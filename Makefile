@@ -67,4 +67,6 @@ clean:
 
 .PHONY: all
 all: $(BUILD_DIR)/$(NAME).glo $(BUILD_DIR)/$(NAME).nls $(BUILD_DIR)/$(NAME).bbl recompile_latex
+
+.PHONY: full
 full: all clean
