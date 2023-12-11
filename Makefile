@@ -16,23 +16,23 @@ endif
 
 # Source files
 ifeq ($(OS),Windows_NT)
-	SOURCES       := $(powershell -Command "Get-ChildItem -Recurse -Filter *.tex | Where-Object { $_.FullName -notlike '*\\Verzeichnisse\\*' } | ForEach-Object { $_.FullName }") 	# Document sources (Windows)
-	INDICES       := $(powershell -Command "Get-ChildItem -Recurse -Filter *.tex -Path .\Verzeichnisse | ForEach-Object { $_.FullName }")                 							# Index files (Windows)
+	SOURCES     := $(powershell -Command "Get-ChildItem -Recurse -Filter *.tex | Where-Object { $_.FullName -notlike '*\\Verzeichnisse\\*' } | ForEach-Object { $_.FullName }")  # Document sources (Windows)
+	INDICES     := $(powershell -Command "Get-ChildItem -Recurse -Filter *.tex -Path .\Verzeichnisse | ForEach-Object { $_.FullName }")                                          # Index files (Windows)
 else
-	SOURCES       := $(shell find . -name '*.tex' -not -path './Verzeichnisse/*')																									# Document sources (Unix-like)
-	INDICES       := $(shell find ./Verzeichnisse -name '*.tex')                  			 																						# Index files (Unix-like)
+	SOURCES     := $(shell find . -name '*.tex' -not -path './Verzeichnisse/*')  # Document sources (Unix-like)
+	INDICES     := $(shell find ./Verzeichnisse -name '*.tex')                   # Index files (Unix-like)
 endif
-BIBLIOGRAPHY  := Verzeichnisse/Literaturverzeichnis.bib                      			 																							# Bibliography
-GLOSSARY      := Verzeichnisse/Glossar.tex                                   			 																							# Glossary
+BIBLIOGRAPHY  := Verzeichnisse/Literaturverzeichnis.bib                        # Bibliography
+GLOSSARY      := Verzeichnisse/Glossar.tex                                     # Glossary
 
 NAME          := Arbeit
 BUILD_DIR     := .build
-ARGS_PDFLATEX := -output-directory=$(BUILD_DIR) --shell-escape
+ARGS_PDFLATEX := -output-directory=$(BUILD_DIR)
 
 # Generate build directory (including child directories) if non-existant
 $(BUILD_DIR):
 ifeq ($(OS),Windows_NT)
-	powershell -Command "Get-ChildItem -Directory -Exclude '.*' | ForEach-Object { New-Item -ItemType Directory -Force -Path "${BUILD_DIR}" -Name $$_.Name }"	
+	powershell -Command "Get-ChildItem -Directory -Exclude '.*' | ForEach-Object { New-Item -ItemType Directory -Force -Path "${BUILD_DIR}" -Name $$_.Name }"
 else
 	@for DIR in $(shell find . -maxdepth 1 -mindepth 1 -type d -not -name '.*' -exec basename '{}' \;); do \
 		mkdir -p ${BUILD_DIR}/$$DIR; \
