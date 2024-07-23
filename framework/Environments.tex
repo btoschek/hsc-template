@@ -76,6 +76,9 @@
   % Header is considered the 1st page
   \addtocounter{page}{1}
 
+  % Peripheral pages have to be numbered using roman numerals
+  \pagenumbering{Roman}
+
   % ===========================================================================
   %                              Page Ordering
   % ===========================================================================
@@ -140,8 +143,19 @@
   \fi
 
   \newpage
+
+  % Save page counter, used for consecutive numbering of peripherals following main content
+  \newcounter{HSCPeripheralNumbering}
+  \setcounter{HSCPeripheralNumbering}{\value{page}}
+
+  % Set numbering of pages to arabic for main content
+  \pagenumbering{arabic}
 }
 {
+  % Reset numbering to use roman numerals for rest of peripheral files
+  \pagenumbering{Roman}
+  \setcounter{page}{\value{HSCPeripheralNumbering}}
+
   % Bibliography
   \iftotalcountcitations
     \newpage
