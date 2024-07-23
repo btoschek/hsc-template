@@ -158,7 +158,7 @@
 \DeclareTotalCounter{countnomen}
 \newcommand*{\nomen}[2]{\nomenclature{#1}{#2}\stepcounter{countnomen}}
 \newcommand{\nomunit}[1]{\renewcommand{\nomentryend}{\hspace*{\fill}#1}}
-\newcommand{\nomsi}[1]{\nomunit{[\si{#1}]}}
+\newcommand{\nomsi}[1]{\nomunit{$\left[\si{#1}\right]$}}
 
 % Custom glossary patches:
 %   - count usage (used for on-demand glossary)
