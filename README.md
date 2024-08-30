@@ -11,6 +11,8 @@ allows the user to further customize and extend it.
 You can find an [example document](https://github.com/btoschek/hsc-template/blob/example/Arbeit.pdf)
 based on this template (including a small overview of features) over on the
 [example](https://github.com/btoschek/hsc-template/tree/example) branch.
+For further customization options or documentation please consult the template's
+[wiki](https://github.com/btoschek/hsc-template/wiki).
 
 > ⚠️ **INFO**: The template is set up to only support German (despite this README
 > and the source code being commented and written in English).
