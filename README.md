@@ -1,5 +1,12 @@
 # Document Template HS Coburg
 
+> [!WARNING]
+> This repository has been archived as maintenance has officially been taken over by
+> HS Coburg at [hscoburg/FEIF-thesis-and-report-template](https://github.com/hscoburg/FEIF-thesis-and-report-template).
+> Please direct all your issues and pull requests there. Thank you to everyone who helped
+> in creating and improving this template, raising awareness of it or just using it for actual assignments.
+> Without you, it would not have become such a great success.
+
 This repository provides a student-maintained and improved version of the
 so far available FEIF document template. The template got reworked from
 the ground up, improving the author's experience and providing a cleaner
@@ -14,7 +21,8 @@ based on this template (including a small overview of features) over on the
 For further customization options or documentation please consult the template's
 [wiki](https://github.com/btoschek/hsc-template/wiki).
 
-> ⚠️ **INFO**: The template is set up to only support German (despite this README
+> [!NOTE]
+> The template is set up to only support German (despite this README
 > and the source code being commented and written in English).
 
 ## Table of Contents:
